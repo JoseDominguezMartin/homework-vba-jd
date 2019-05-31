@@ -1,0 +1,37 @@
+Sub Stock():
+Dim Ticker, currentValue, nextValue As String
+Dim TotalStockVolume As Double
+Dim summaryTablerow As Integer
+Dim lastRow As Long
+
+
+TotalStockVolume = 0
+summaryTablerow = 2
+
+lastRow = Cells(Rows.Count, 1).End(xlUp).Row
+
+For i = 2 To lastRow
+
+currentValue = Cells(i, 1).Value
+nextValue = Cells(i + 1, 1).Value
+
+If currentValue <> nextValue Then
+
+Ticker = currentValue
+TotalStockVolume = TotalStockVolume + Cells(i, 7).Value
+
+Range("i" & summaryTablerow).Value = Ticker
+Range("j" & summaryTablerow).Value = TotalStockVolume
+
+summaryTablerow = summaryTablerow + 1
+
+TotalStockVolume = 0
+
+Else
+TotalStockVolume = TotalStockVolume + Cells(i, 7).Value
+
+End If
+
+Next i
+
+End Sub
